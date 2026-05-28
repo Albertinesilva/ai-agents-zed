@@ -70,9 +70,13 @@ O agente despachado retorna isto:
 - **Skill**: `skills/scout-job-search.md` deve ser carregado pelo Scout
 
 ### Curator (Opção B - Encontrar Cursos)
-- **Tarefa**: Encontrar cursos para preencher lacunas de habilidades
-- **Contexto**: Comparar Habilidades atuais com Funções alvo e identificar lacunas
-- **Saída esperada**: Lista de cursos recomendados com título, plataforma, duração e link
+- **Tarefa**: Encontrar cursos para preencher lacunas de habilidades na Alura
+- **Contexto**: Comparar Habilidades atuais do usuário com habilidades exigidas nas vagas encontradas pelo Scout
+- **Saída esperada**: Lista de cursos recomendados com título, plataforma, carga horária, instrutor, link e habilidade relacionada
+- **Ferramentas**: Priorizar firecrawl CLI para busca na Alura (https://www.alura.com.br); se falhar, usar fetch como fallback
+- **Arquivos necessários**: `data/user-profile.md` (habilidades atuais), `data/job-search-results.md` (vagas com descrições)
+- **Skill**: `skills/curator-course-search.md` deve ser carregado pelo Curator
+- **Dependência**: Requer que o Scout tenha executado antes (opção A) para ter vagas com descrições
 
 ### Coach (Opção C - Entrevista Simulada)
 - **Tarefa**: Praticar com uma entrevista simulada

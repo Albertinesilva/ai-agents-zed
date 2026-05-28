@@ -53,7 +53,7 @@ Mostrado quando o quiz está completo:
 3. Receber a seleção do usuário (A/B/C/D)
 4. Delegar ao agente correto via `spawn_agent`:
    - Opção A: Despachar Scout com perfil do usuário e contexto de busca de vagas
-   - Opção B: Ainda não implementado (fase futura)
+   - Opção B: Despachar Curator com perfil do usuário e contexto de busca de cursos (incluindo lacunas de habilidades)
    - Opção C: Coach é despachado 6 vezes para entrevista completa
    - Opção D: Refazer quiz (sobrescreve arquivos)
 5. Exibir a resposta do agente ao usuário
@@ -173,4 +173,30 @@ Skill: skills/scout-job-search.md
 
 ### saida_esperada
 Envelope de resposta com lista de vagas (título, empresa, localização, link, descrição)
+```
+
+## Despacho do Curator (Opção B)
+
+Quando o usuário selecionar a opção B, construir o envelope de despacho:
+
+```
+## DESPACHO: CURATOR
+### referencia_persona
+[Conteúdo completo de personas/curator.md]
+
+### tarefa
+Buscar cursos na Alura que complementem as habilidades faltantes em relação às vagas encontradas
+
+### perfil_usuario
+[Conteúdo de data/user-profile.md]
+
+### contexto
+Sites: Alura (https://www.alura.com.br)
+Ferramentas: Priorizar firecrawl CLI; se falhar, usar fetch
+Skill: skills/curator-course-search.md
+Arquivos necessários: data/user-profile.md (habilidades atuais), data/job-search-results.md (vagas com descrições)
+Dependência: Requer que o Scout tenha executado antes (opção A)
+
+### saida_esperada
+Envelope de resposta com lista de cursos (título, plataforma, carga horária, instrutor, link, habilidade relacionada)
 ```

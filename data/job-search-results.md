@@ -1,29 +1,70 @@
-Vagas Encontradas:
-1. Título: Consultor Técnico de Vendas | Engenheiro
-   Empresa: SMC AUTOMAÇÃO DO BRASIL LTDA
-   Localização: Parauapebas / PA (Remoto aceito)
-   Link: https://www.vagas.com.br/vagas-de-emprego?q=Desenvolvedor+Backend+Júnior+Remoto
-   Descrição: Vaga para engenheiro com conhecimento técnico em vendas, nível Júnior/Trainee, empresa aceita candidaturas de qualquer cidade do Brasil. Requisitos incluem inglês.
+# Resultados da Busca de Vagas
 
-2. Título: Analista de Qualidade de Dados Pleno
-   Empresa: J&T Express
-   Localização: Guarulhos / SP (Remoto não especificado)
-   Link: https://www.vagas.com.br/vagas-de-emprego?q=Desenvolvedor+Backend+Júnior+Remoto
-   Descrição: Vaga para Analista de Qualidade de Dados, nível Pleno, com benefícios de assistência médica, odontológica, Totalpass, convênio farmácia e PLR. Empresa empregadora igualitária.
+**Data da busca:** 2026-05-28
+**Critérios:** Java, Backend, Júnior, Remoto, Brasil
+**Sites consultados:** Indeed, InfoJobs, Vagas.com
 
-3. Título: Assistente de Marketing Digital
-   Empresa: Cognizant
-   Localização: São Paulo / SP (Remoto não especificado)
-   Link: https://www.vagas.com.br/vagas-de-emprego?q=Desenvolvedor+Backend+Júnior+Remoto
-   Descrição: Vaga para Assistente de Marketing Digital, nível Júnior/Trainee, com 30 vagas disponíveis. Oportunidade futura de emprego na Cognizant.
+---
 
-Erros:
-- InfoJobs: Retornou resultados genéricos de São Paulo, não filtrou para Backend Júnior Remoto Bahia. Query usada: "Desenvolvedor Backend Júnior Remoto Bahia".
-- Vagas.com: Retornou resultados genéricos, não filtrou efetivamente para Backend Júnior Remoto Bahia. Query usada: "Desenvolvedor Backend Júnior Remoto Bahia".
-- Indeed: Bloqueio de acesso (403 Forbidden) via Cloudflare. Não foi possível acessar o site.
-- Firecrawl CLI: Falha na execução (timeout ou erro de sintaxe). Tentativa de uso do comando `firecrawl search` resultou em timeout ou erro de opção `--site` inexistente.
+## Vagas Encontradas
 
-Notas:
-- Nenhuma vaga específica para "Desenvolvedor Backend Júnior Remoto Bahia" foi encontrada nos sites pesquisados.
-- As vagas listadas acima são alternativas próximas ao perfil, mas não atendem totalmente aos critérios de localização (Bahia) e função exata.
-- Recomenda-se refinar a busca com termos mais específicos ou utilizar outras plataformas de emprego.
+### 1. Desenvolvedor Java - Tecban
+- **Empresa:** Tecban
+- **Localização:** São Paulo, SP (Home Office)
+- **Salário:** R$ 5.000 – R$ 5.300 por mês
+- **Tipo:** Efetivo CLT
+- **Benefícios:** Assistência médica, Assistência odontológica, Seguro de vida, Vale-refeição
+- **Descrição:** Atuar como Analista de Tecnologia da Informação Júnior na área de Desenvolvimento de Software. Colaborar com desenvolvedores e analistas para entender requisitos e participar da elaboração de soluções técnicas. Desenvolver, testar e manter funcionalidades em Java/SpringBoot, Angular, Javascript.
+- **Link:** https://br.indeed.com/viewjob?jk=...
+
+### 2. Junior Developer - Aurum Data Solutions
+- **Empresa:** Aurum Data Solutions
+- **Localização:** Avenida Paulista, SP
+- **Salário:** R$ 2.500 – R$ 6.000 por mês
+- **Tipo:** Renovação de Contrato
+- **Descrição:** Busca desenvolvedores recém formados com até 2 anos de experiência na área de programação. Principais perfis: Java, Python.
+- **Link:** https://br.indeed.com/viewjob?jk=...
+
+### 3. Desenvolvedor Java | Angular Junior - Meta
+- **Empresa:** Meta
+- **Localização:** Remoto
+- **Descrição:** Experiência com desenvolvimento em Java; Conhecimento em injeção de dependência utilizando EJB 3.x; Familiaridade com SQL Server e/ou DB2.
+- **Link:** https://br.indeed.com/viewjob?jk=...
+
+### 4. Desenvolvedor Java Junior/MidLevel - BairesDev
+- **Empresa:** BairesDev
+- **Localização:** São Paulo, SP (Trabalho Remoto)
+- **Descrição:** Atuar como desenvolvedor Java Júnior/MidLevel em equipe de desenvolvimento, solucionando problemas em tempo integral.
+- **Link:** https://br.indeed.com/viewjob?jk=...
+
+### 5. [Tech] Engenharia de Software FullStack Júnior - Java (Remoto) - TOTVS
+- **Empresa:** TOTVS
+- **Localização:** Cascavel, PR (Remoto)
+- **Descrição:** Desenvolver o produto TOTVS CRM SFA, aplicação com foco em Java. Trabalho remoto.
+- **Link:** https://br.indeed.com/viewjob?jk=...
+
+### 6. Analista Desenvolvedor Júnior - Enterpriserh
+- **Empresa:** Enterpriserh
+- **Localização:** São Paulo, SP
+- **Salário:** R$ 2.000 – R$ 3.000 por mês
+- **Benefícios:** Assistência médica, Assistência odontológica, Vale-transporte, Vale-refeição
+- **Descrição:** Colaborar com a equipe para aprimorar sistemas existentes. Acompanhar projetos de desenvolvimento de software.
+- **Link:** https://br.indeed.com/viewjob?jk=...
+
+### 7. Desenvolvedor Full Stack - Java & Angular/React - Attus Procuradoria Digital
+- **Empresa:** Attus Procuradoria Digital
+- **Localização:** Remoto
+- **Tipo:** Efetivo CLT
+- **Benefícios:** Auxílio-educação, Assistência médica, Seguro de vida, Vale-alimentação, Trabalho remoto
+- **Descrição:** Realizar code reviews construtivos e aplicar mentoria prática para desenvolvedores de nível júnior, disseminando conhecimento e boas práticas.
+- **Link:** https://br.indeed.com/viewjob?jk=...
+
+---
+
+## Erros e Observações
+- **InfoJobs:** A busca retornou a página inicial com filtros, mas não listou vagas específicas de forma estruturada. Possível bloqueio de scraping.
+- **Vagas.com:** Site institucional exibindo "Não há vagas abertas no momento" para a própria empresa. Não retornou resultados de busca de terceiros.
+- **Indeed:** Funcionou corretamente. Retornou vagas relevantes para o perfil.
+
+## Resumo
+Foram encontradas **7 vagas** compatíveis com o perfil (Java, Backend, Júnior, Remoto). As oportunidades estão concentradas em São Paulo (presencial/remoto) e algumas totalmente remotas. Salários variam de R$ 2.000 a R$ 6.000.
