@@ -102,22 +102,60 @@ Agente focado em simulações de entrevistas e feedback das respostas fornecidas
 
 ```text
 RECOLOCA-IA
+│
 ├── agents/
-├── data/
-├── docs/
-├── personas/
-│   ├── maestro.md
-│   ├── scout.md
-│   ├── curator.md
-│   └── coach.md
-├── skills/
-│   ├── dispatch.md
-│   ├── firecrawl.md
-│   ├── job-search.md
-│   ├── course-analysis.md
-│   └── interview-sim.md
-└── AGENTS.md
+│   ├── AGENTS.md
+│   │
+│   ├── data/
+│   │   ├── personality-quiz.md
+│   │   ├── user-profile.md
+│   │   ├── job-search-results.md
+│   │   └── course-search-results.md
+│   │
+│   ├── docs/
+│   │   ├── plano.md
+│   │   ├── plano-aula-1.md
+│   │   ├── plano-aula-2.md
+│   │   ├── plano-aula-3.md
+│   │   └── plano-aula-4.md
+│   │
+│   ├── personas/
+│   │   ├── maestro.md
+│   │   ├── scout.md
+│   │   ├── curator.md
+│   │   └── coach.md
+│   │
+│   └── skills/
+│       ├── dispatch.md
+│       ├── firecrawl.md
+│       ├── job-search.md
+│       ├── scout-job-search.md
+│       ├── curator-course-search.md
+│       ├── course-analysis.md
+│       └── interview-sim.md
+│
+└── project/
+    └── MVP desenvolvido com React + Vite
 ```
+
+### Organização
+
+| Diretório          | Responsabilidade                                                                                                     |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------- |
+| `agents/`          | Núcleo do laboratório contendo agentes, personas, habilidades, documentação e dados utilizados durante as execuções. |
+| `agents/data/`     | Armazena perfis, questionários e resultados gerados pelos agentes.                                                   |
+| `agents/docs/`     | Planejamento e documentação produzidos durante a definição da solução.                                               |
+| `agents/personas/` | Define o comportamento, contexto e responsabilidades de cada agente.                                                 |
+| `agents/skills/`   | Contém os fluxos, instruções e capacidades utilizadas pelos agentes.                                                 |
+| `agents/AGENTS.md` | Arquivo central de configuração e coordenação do ambiente multiagente.                                               |
+| `project/`         | MVP desenvolvido em React e Vite para validar a proposta em uma interface web.                                       |
+
+### Agentes
+
+* **Maestro** → Orquestra o fluxo principal e coordena os demais agentes.
+* **Scout** → Pesquisa oportunidades e analisa requisitos de vagas.
+* **Curator** → Identifica lacunas de conhecimento e recomenda cursos.
+* **Coach** → Simula entrevistas e fornece feedback sobre as respostas.
 
 ---
 ## 💻 MVP Front-end
