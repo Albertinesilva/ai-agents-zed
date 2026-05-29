@@ -1,14 +1,39 @@
-# 🤖 Recoloca IA
+<div align="center">
 
 # 🤖 Recoloca IA
+
+...
+
+</div>
 
 Projeto experimental focado na aplicação prática de conceitos de Agentes de IA, orquestração de tarefas e integração com modelos de linguagem.
 
 A proposta surgiu a partir dos conceitos apresentados na [Imersão IA da Alura](https://www.alura.com.br/?srsltid=AfmBOoqZOpSVJb0TTCVrzdiNZ3PeVGmvS-ngVp7pasbHYPeYGUaZaBuU) e foi expandida com implementações próprias, incluindo a construção de um MVP em React e Vite para validar a experiência proposta pelos agentes.
 
+<div align="center">
+
+[![Demo](https://img.shields.io/badge/Demo-Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white)](https://recoloca-ia.netlify.app/jobs)
+[![Alura](https://img.shields.io/badge/Imersão_IA-Alura-051933?style=for-the-badge)](https://www.alura.com.br/)
+[![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-7-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vite.dev/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
+[![OpenRouter](https://img.shields.io/badge/OpenRouter-LLM-412991?style=for-the-badge)](https://openrouter.ai/)
+[![Firecrawl](https://img.shields.io/badge/Firecrawl-Web_Search-FF6B35?style=for-the-badge)](https://www.firecrawl.dev/)
+[![Zed](https://img.shields.io/badge/Zed-AI_Editor-084CCF?style=for-the-badge)](https://zed.dev/)
+[![AI Agents](https://img.shields.io/badge/AI_Agents-Multi--Agent_System-blue?style=for-the-badge)](#)
+[![Prompt Engineering](https://img.shields.io/badge/Prompt_Engineering-Applied-success?style=for-the-badge)](#)
+[![Context Engineering](https://img.shields.io/badge/Context_Engineering-Applied-informational?style=for-the-badge)](#)
+[![LLM](https://img.shields.io/badge/LLM-Integration-purple?style=for-the-badge)](#)
+[![MVP](https://img.shields.io/badge/MVP-Functional-orange?style=for-the-badge)](https://recoloca-ia.netlify.app/jobs)
+[![Status](https://img.shields.io/badge/Status-Experimental-yellow?style=for-the-badge)](#)
+
+</div>
+
+---
+
 ## 🚀 O que foi explorado
 
-Durante o desenvolvimento deste laboratório foram estudados conceitos como:
+O projeto permitiu explorar conceitos como:
 
 * Criação de agentes especializados
 * Orquestração de agentes
@@ -20,13 +45,14 @@ Durante o desenvolvimento deste laboratório foram estudados conceitos como:
 * Busca e extração de dados na web
 * Integração com modelos de linguagem (LLMs)
 
+---
 ## 🛠️ Ferramentas Utilizadas
 
 ### Zed
 
 Utilizado para definição e execução dos agentes através de arquivos de instrução e contexto.
 
-Aprendizados:
+Explorado durante o projeto:
 
 * Estruturação de personas
 * Separação de responsabilidades entre agentes
@@ -52,6 +78,7 @@ Aprendizados:
 * Integração com diferentes LLMs
 * Configuração de modelos para execução dos agentes
 
+---
 ## 🧠 Estrutura dos Agentes
 
 ### Maestro
@@ -70,6 +97,7 @@ Agente responsável por identificar lacunas de conhecimento e sugerir materiais 
 
 Agente focado em simulações de entrevistas e feedback das respostas fornecidas pelo usuário.
 
+---
 ## 📂 Estrutura do Projeto
 
 ```text
@@ -91,9 +119,10 @@ RECOLOCA-IA
 └── AGENTS.md
 ```
 
+---
 ## 💻 MVP Front-end
 
-Como extensão do laboratório, desenvolvi um MVP utilizando:
+Além da estrutura de agentes definida durante o laboratório, desenvolvi de forma independente um MVP...
 
 - React
 - Vite
@@ -102,20 +131,41 @@ Como extensão do laboratório, desenvolvi um MVP utilizando:
 
 O objetivo foi transformar a proposta conceitual dos agentes em uma interface navegável para experimentação.
 
-🔗 Acesse o MVP: [rcoloca-ia](https://recoloca-ia.netlify.app/jobs)
+🔗 Acesse o Demo: [rcoloca-ia](https://recoloca-ia.netlify.app/jobs)
 
 O MVP demonstra o fluxo principal definido durante o planejamento, mas ainda está em evolução e possui melhorias previstas em usabilidade, integração e experiência do usuário.
 
+---
 ## 📚 Principais Aprendizados
 
-Este projeto serviu como laboratório para compreender na prática:
+Entre os principais aprendizados obtidos durante o desenvolvimento estão:
 
 * Como agentes de IA podem ser especializados por contexto.
 * Como dividir responsabilidades entre múltiplos agentes.
 * Como construir fluxos orientados por planejamento.
 * Como utilizar dados externos para enriquecer respostas.
 * Como transformar uma ideia baseada em IA em um MVP funcional.
+* Como estruturar personas para diferentes objetivos.
+* Como organizar contexto compartilhado entre agentes.
 
+---
 ## 🎓 Contexto
 
-O projeto foi inspirado nos conceitos apresentados durante a Imersão IA da Alura e posteriormente expandido com implementações próprias, permitindo explorar na prática a criação de agentes especializados, planejamento de tarefas, integração com ferramentas de busca e desenvolvimento de uma interface web funcional.
+Projeto inspirado nos conceitos apresentados durante a [Imersão IA da Alura](https://www.alura.com.br/?srsltid=AfmBOoqZOpSVJb0TTCVrzdiNZ3PeVGmvS-ngVp7pasbHYPeYGUaZaBuU) e expandido com implementações próprias para explorar arquiteturas baseadas em agentes, planejamento orientado por IA e integração com ferramentas de busca e modelos de linguagem.
+
+Além da estrutura conceitual dos agentes, foi desenvolvido um MVP independente utilizando React, Vite e Netlify para validar a proposta em uma aplicação web funcional.
+
+🔗 **MVP:** [Recoloca IA](https://recoloca-ia.netlify.app/jobs)
+
+---
+## 👨‍💻 Autor
+
+**Albert Silva de Jesus**  
+Backend Developer • Java • Spring Boot • REST APIs
+
+---
+
+## 📎 Contato
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/albert-backend-java-spring-boot/)
+[![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:albertinesilva.17@gmail.com)
