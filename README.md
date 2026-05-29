@@ -169,7 +169,7 @@ Além da estrutura de agentes definida durante o laboratório, desenvolvi de for
 
 O objetivo foi transformar a proposta conceitual dos agentes em uma interface navegável para experimentação.
 
-🔗 Acesse o Demo: [rcoloca-ia](https://recoloca-ia.netlify.app/jobs)
+🔗 Acesse o Demo: [recoloca-ia](https://recoloca-ia.netlify.app/jobs)
 
 O MVP demonstra o fluxo principal definido durante o planejamento, mas ainda está em evolução e possui melhorias previstas em usabilidade, integração e experiência do usuário.
 
@@ -193,7 +193,7 @@ Projeto inspirado nos conceitos apresentados durante a [Imersão IA da Alura](ht
 
 Além da estrutura conceitual dos agentes, foi desenvolvido um MVP independente utilizando React, Vite e Netlify para validar a proposta em uma aplicação web funcional.
 
-🔗 **MVP:** [Recoloca IA](https://recoloca-ia.netlify.app/jobs)
+🔗 **MVP:** [recoloca IA](https://recoloca-ia.netlify.app/jobs)
 
 ---
 ## 👨‍💻 Autor
