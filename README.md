@@ -1,8 +1,11 @@
 # 🤖 Recoloca IA
 
+# 🤖 Recoloca IA
+
 Projeto experimental focado na aplicação prática de conceitos de Agentes de IA, orquestração de tarefas e integração com modelos de linguagem.
 
-A proposta surgiu a partir dos conceitos apresentados na Imersão IA da Alura e foi expandida com implementações próprias, incluindo a construção de um MVP em React e Vite para validar a experiência proposta pelos agentes.
+A proposta surgiu a partir dos conceitos apresentados na [Imersão IA da Alura](https://www.alura.com.br/?srsltid=AfmBOoqZOpSVJb0TTCVrzdiNZ3PeVGmvS-ngVp7pasbHYPeYGUaZaBuU) e foi expandida com implementações próprias, incluindo a construção de um MVP em React e Vite para validar a experiência proposta pelos agentes.
+
 ## 🚀 O que foi explorado
 
 Durante o desenvolvimento deste laboratório foram estudados conceitos como:
@@ -92,12 +95,14 @@ RECOLOCA-IA
 
 Como extensão do laboratório, desenvolvi um MVP utilizando:
 
-* React
-* Vite
-* JavaScript
-* Netlify
+- React
+- Vite
+- JavaScript
+- Netlify
 
 O objetivo foi transformar a proposta conceitual dos agentes em uma interface navegável para experimentação.
+
+🔗 Acesse o MVP: [rcoloca-ia](https://recoloca-ia.netlify.app/jobs)
 
 O MVP demonstra o fluxo principal definido durante o planejamento, mas ainda está em evolução e possui melhorias previstas em usabilidade, integração e experiência do usuário.
 
