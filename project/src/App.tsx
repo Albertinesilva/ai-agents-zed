@@ -1,12 +1,15 @@
 import { useEffect, useMemo, useState } from 'react';
 import { BrowserRouter, Navigate, NavLink, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
-import type { QuizProfile, SearchEnvelope, UserProfile } from '../shared/types';
-import { deriveTargetRoles, emptyQuizProfile, emptyUserProfile } from '../shared/types';
+import type { QuizProfile, UserProfile } from '../shared/types';
+import { deriveSkillGaps, deriveTargetRoles, emptyQuizProfile, emptyUserProfile } from '../shared/types';
 import { CoachPage } from './pages/CoachPage';
 import { CoursesPage } from './pages/CoursesPage';
 import { HomePage } from './pages/HomePage';
 import { JobsPage } from './pages/JobsPage';
 import { QuizPage } from './pages/QuizPage';
+import { clearApplicationData, loadCourses, loadJobs, loadProfile, loadQuiz, saveCourses, saveJobs, saveProfile as persistProfile, saveQuiz } from './services/storageService';
+import { searchCourses } from './services/curatorService';
+import { searchJobs } from './services/scoutService';
 import {
   type Activity,
   type AppPageKey,
@@ -39,6 +42,21 @@ const emptyState: AppState = {
   courses: [],
   gaps: [],
 };
+
+function readPersistedState(): AppState {
+  const quiz = loadQuiz();
+  const profile = loadProfile();
+  const jobs = loadJobs();
+  const courses = loadCourses();
+
+  return {
+    quiz,
+    profile,
+    jobs,
+    courses,
+    gaps: deriveSkillGaps(profile, jobs),
+  };
+}
 
 function readUiState(): PersistedUiState {
   if (typeof window === 'undefined') {
@@ -73,23 +91,13 @@ function saveUiState(nextState: PersistedUiState) {
   window.localStorage.setItem(storageKeys.ui, JSON.stringify(nextState));
 }
 
-async function requestJson<T>(input: RequestInfo | URL, init?: RequestInit) {
-  const response = await fetch(input, init);
-  if (!response.ok) {
-    throw new Error(`Request failed with ${response.status}`);
-  }
-
-  return (await response.json()) as T;
-}
-
 function AppShell() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [state, setState] = useState<AppState>(emptyState);
+  const [state, setState] = useState<AppState>(readPersistedState);
   const [uiState, setUiState] = useState<PersistedUiState>(readUiState);
   const [busy, setBusy] = useState<MenuKey | null>(null);
-  const [loading, setLoading] = useState(true);
   const [statusError, setStatusError] = useState<string | null>(null);
 
   const quizComplete = Boolean(state.profile.completed);
@@ -107,58 +115,16 @@ function AppShell() {
     : 'Preencha o quiz para liberar o menu principal e manter o fluxo coerente entre Maestro, Scout, Curator e Coach.';
 
   useEffect(() => {
-    let cancelled = false;
-
-    async function hydrate() {
-      try {
-        const [serverState, storedUi] = await Promise.all([
-          requestJson<Partial<AppState>>('/api/state'),
-          Promise.resolve(readUiState()),
-        ]);
-
-        if (cancelled) {
-          return;
-        }
-
-        const nextState: AppState = {
-          quiz: serverState.quiz ?? emptyQuizProfile(),
-          profile: serverState.profile ?? emptyUserProfile(),
-          jobs: serverState.jobs ?? [],
-          courses: serverState.courses ?? [],
-          gaps: serverState.gaps ?? [],
-        };
-
-        setState(nextState);
-        setUiState(storedUi);
-
-        if (storedUi.mode === 'demo') {
-          setState({
-            quiz: { ...demoPreset.profile, completed: true },
-            profile: demoPreset.profile,
-            jobs: demoPreset.jobs,
-            courses: demoPreset.courses,
-            gaps: demoPreset.gaps,
-          });
-        }
-
-        navigate(`/${storedUi.page}`, { replace: true });
-      } catch (error) {
-        if (!cancelled) {
-          setStatusError(error instanceof Error ? error.message : 'Falha ao carregar o estado inicial');
-        }
-      } finally {
-        if (!cancelled) {
-          setLoading(false);
-        }
-      }
+    if (uiState.mode === 'demo' && !uiState.demoLoaded) {
+      setState({
+        quiz: { ...demoPreset.profile, completed: true },
+        profile: demoPreset.profile,
+        jobs: demoPreset.jobs,
+        courses: demoPreset.courses,
+        gaps: demoPreset.gaps,
+      });
     }
-
-    void hydrate();
-
-    return () => {
-      cancelled = true;
-    };
-  }, [navigate]);
+  }, [uiState.demoLoaded, uiState.mode]);
 
   useEffect(() => {
     saveUiState(uiState);
@@ -215,18 +181,7 @@ function AppShell() {
       lastAction: 'Demo desligada e estado local restaurado',
     }));
 
-    try {
-      const serverState = await requestJson<Partial<AppState>>('/api/state');
-      setState({
-        quiz: serverState.quiz ?? emptyQuizProfile(),
-        profile: serverState.profile ?? emptyUserProfile(),
-        jobs: serverState.jobs ?? [],
-        courses: serverState.courses ?? [],
-        gaps: serverState.gaps ?? [],
-      });
-    } catch {
-      setState(emptyState);
-    }
+    setState(readPersistedState());
 
     navigate('/home');
   };
@@ -250,6 +205,11 @@ function AppShell() {
       return;
     }
 
+    const nextQuiz: QuizProfile = {
+      ...state.quiz,
+      completed: complete,
+    };
+
     const payload: UserProfile = {
       ...state.profile,
       targetRoles: deriveTargetRoles(state.quiz.areaInterest, state.quiz.experienceLevel),
@@ -258,16 +218,13 @@ function AppShell() {
 
     setBusy('D');
     try {
-      const result = await requestJson<{ quiz: QuizProfile; profile: UserProfile }>('/api/profile', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-
+      saveQuiz(nextQuiz);
+      persistProfile(payload);
       setState((current) => ({
         ...current,
-        quiz: result.quiz,
-        profile: result.profile,
+        quiz: nextQuiz,
+        profile: payload,
+        gaps: deriveSkillGaps(payload, current.jobs),
       }));
       setUiState((current) => ({
         ...current,
@@ -290,7 +247,7 @@ function AppShell() {
 
     setBusy('D');
     try {
-      await requestJson('/api/reset', { method: 'POST' });
+      clearApplicationData();
       setState(emptyState);
       setUiState({ ...defaultUiState, page: 'quiz', lastAction: 'Quiz reiniciado' });
       navigate('/quiz');
@@ -325,32 +282,28 @@ function AppShell() {
 
     try {
       if (menu === 'A') {
-        const result = await requestJson<SearchEnvelope>('/api/scout', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(state.profile),
-        });
+        const result = await searchJobs(state.profile);
+        saveJobs(result.data);
+        const nextGaps = result.gaps?.length ? result.gaps : deriveSkillGaps(state.profile, result.data);
 
         setState((current) => ({
           ...current,
           jobs: result.data,
-          gaps: result.gaps ?? current.gaps,
+          gaps: nextGaps,
         }));
         setUiState((current) => ({ ...current, lastAction: 'Scout concluiu a busca de vagas' }));
         navigate('/jobs');
       }
 
       if (menu === 'B') {
-        const result = await requestJson<SearchEnvelope>('/api/curator', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ profile: state.profile, gaps: state.gaps }),
-        });
+        const result = await searchCourses(state.profile, state.jobs);
+        saveCourses(result.data);
+        const nextGaps = result.gaps?.length ? result.gaps : deriveSkillGaps(state.profile, state.jobs);
 
         setState((current) => ({
           ...current,
           courses: result.data,
-          gaps: result.gaps ?? current.gaps,
+          gaps: nextGaps,
         }));
         setUiState((current) => ({ ...current, lastAction: 'Curator concluiu a busca de cursos' }));
         navigate('/courses');
@@ -396,14 +349,6 @@ function AppShell() {
   };
 
   const summary = `${state.profile.areaInterest || 'Perfil sem área'} · ${state.profile.experienceLevel || 'nível pendente'} · ${state.profile.workPreference || 'formato pendente'}`;
-
-  if (loading) {
-    return (
-      <div className="flex min-h-screen items-center justify-center px-4 text-slate-200">
-        <div className="glass-panel rounded-[1.75rem] px-6 py-5 text-sm">Carregando estado do Maestro...</div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen app-grid">

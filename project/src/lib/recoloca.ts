@@ -50,8 +50,8 @@ export const appPages = [
 export type AppPageKey = typeof appPages[number]['key'];
 
 export const menuEntries: Array<{ key: MenuKey; title: string; subtitle: string; color: 'emerald' | 'cyan' | 'violet' | 'amber' }> = [
-  { key: 'A', title: 'Buscar vagas', subtitle: 'Scout com firecrawl e fallback via fetch.', color: 'emerald' },
-  { key: 'B', title: 'Encontrar cursos', subtitle: 'Curator cruza vagas e lacunas.', color: 'cyan' },
+  { key: 'A', title: 'Buscar vagas', subtitle: 'Scout via Netlify Functions e Firecrawl API.', color: 'emerald' },
+  { key: 'B', title: 'Encontrar cursos', subtitle: 'Curator cruza vagas, gaps e trilhas da Alura.', color: 'cyan' },
   { key: 'C', title: 'Entrevista simulada', subtitle: 'Coach em 6 etapas guiadas.', color: 'violet' },
   { key: 'D', title: 'Refazer quiz', subtitle: 'Reinicia o perfil e bloqueia o menu.', color: 'amber' },
 ];
@@ -195,7 +195,7 @@ export function buildDispatchPreview(menu: MenuKey, profile: UserProfile, stage:
       '### contexto',
       ...contextLines,
       '### saida_esperada',
-      'Salvar data/personality-quiz.md e data/user-profile.md antes de liberar o menu.',
+      'Salvar quiz e perfil em localStorage antes de liberar o menu.',
     ].join('\n');
   }
 
@@ -210,7 +210,7 @@ export function buildDispatchPreview(menu: MenuKey, profile: UserProfile, stage:
         '### perfil_usuario',
         `Área: ${profile.areaInterest || '-'} | Nível: ${profile.experienceLevel || '-'} | Localização: ${profile.location || '-'}`,
         '### contexto',
-        'Priorizar firecrawl CLI e usar fetch apenas se a extração falhar.',
+        'Chamar /.netlify/functions/scout via fetch e usar apenas a API HTTP oficial do Firecrawl.',
         '### saida_esperada',
         'Envelope com vagas numeradas, pares chave-valor, sem tabelas markdown.',
       ].join('\n');
@@ -224,7 +224,7 @@ export function buildDispatchPreview(menu: MenuKey, profile: UserProfile, stage:
         '### perfil_usuario',
         `Área: ${profile.areaInterest || '-'} | Nível: ${profile.experienceLevel || '-'} | Localização: ${profile.location || '-'}`,
         '### contexto',
-        'Comparar data/user-profile.md com data/job-search-results.md e priorizar firecrawl.',
+        'Chamar /.netlify/functions/curator via fetch e priorizar cursos da Alura.',
         '### saida_esperada',
         'Envelope com cursos numerados, pares chave-valor, sem tabelas markdown.',
       ].join('\n');
@@ -246,7 +246,7 @@ export function buildDispatchPreview(menu: MenuKey, profile: UserProfile, stage:
         '### tarefa',
         'Reiniciar o quiz, limpar os resultados e retornar ao estado inicial.',
         '### contexto',
-        'Data reset em personality-quiz.md, user-profile.md, job-search-results.md e course-search-results.md.',
+        'Limpar quiz, perfil, vagas e cursos no localStorage.',
         '### saida_esperada',
         'Formulário vazio e menu bloqueado até nova conclusão.',
       ].join('\n');

@@ -36,6 +36,24 @@ export interface SearchEnvelope {
   markdown: string;
 }
 
+export const skillLexiconByArea: Record<string, string[]> = {
+  'Frontend': ['React', 'TypeScript', 'JavaScript', 'HTML', 'CSS', 'Acessibilidade', 'Testes'],
+  'Backend': ['Node.js', 'TypeScript', 'REST', 'APIs', 'SQL', 'Docker', 'AWS'],
+  'Ciência de Dados': ['Python', 'SQL', 'Pandas', 'Machine Learning', 'Estatística', 'Power BI'],
+  'Mobile': ['React Native', 'Flutter', 'Kotlin', 'Swift', 'Android', 'iOS'],
+  'DevOps': ['Docker', 'Kubernetes', 'AWS', 'Linux', 'CI/CD', 'Observabilidade'],
+  'Full Stack': ['React', 'TypeScript', 'Node.js', 'APIs', 'SQL', 'Docker'],
+  'Governança de Dados': ['LGPD', 'Qualidade de Dados', 'Catálogo de Dados', 'Governança', 'Compliance'],
+  'Design UX': ['Pesquisa', 'Prototipação', 'Figma', 'Arquitetura da Informação', 'Testes de Usabilidade'],
+  'Design UI': ['Figma', 'Design System', 'Tipografia', 'Color System', 'Prototipação'],
+  'Liderança': ['Gestão de Pessoas', 'Comunicação', 'Agile', 'Feedback', 'Estratégia'],
+  'RH': ['Recrutamento', 'Seleção', 'People Analytics', 'Entrevista', 'Employer Branding'],
+  'Marketing de Mídias Sociais': ['Conteúdo', 'Social Media', 'Copywriting', 'Analytics', 'Engajamento'],
+  'Growth Marketing': ['CRO', 'SEO', 'Analytics', 'Experimentação', 'Aquisição'],
+  'Gestão de Produtos': ['Discovery', 'Roadmap', 'Product Metrics', 'Agile', 'Stakeholders'],
+  'Cibersegurança': ['SOC', 'Threat Modeling', 'PenTest', 'Cloud Security', 'LGPD'],
+};
+
 export const areaExperienceRoleMap: Record<string, Record<string, string[]>> = {
   'Frontend': {
     'Júnior': ['Desenvolvedor Frontend', 'Desenvolvedor UI Júnior', 'Desenvolvedor Web'],
@@ -136,6 +154,51 @@ export function emptyUserProfile(): UserProfile {
 
 export function deriveTargetRoles(areaInterest: string, experienceLevel: string): string[] {
   return areaExperienceRoleMap[areaInterest]?.[experienceLevel] ?? [];
+}
+
+type SearchProfileLike = {
+  areaInterest: string;
+  experienceLevel: string;
+  techSkills: string;
+  targetRoles?: string[];
+};
+
+function splitSkillTokens(value: string): string[] {
+  return value
+    .split(/[\n,;/|]+/)
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
+function uniqueByNormalized(values: string[]): string[] {
+  const seen = new Set<string>();
+  const result: string[] = [];
+
+  for (const value of values) {
+    const token = normalizeToken(value);
+    if (!token || seen.has(token)) {
+      continue;
+    }
+
+    seen.add(token);
+    result.push(value.trim());
+  }
+
+  return result;
+}
+
+export function deriveSkillGaps(profile: SearchProfileLike, jobs: SearchItem[] = []): string[] {
+  const ownedSkills = new Set([
+    ...splitSkillTokens(profile.techSkills),
+    ...jobs.flatMap((job) => [job.relatedSkill, ...(job.skills ?? [])]),
+  ].map((value) => normalizeToken(value)));
+
+  const candidateSkills = uniqueByNormalized([
+    ...(skillLexiconByArea[profile.areaInterest] ?? []),
+    ...jobs.flatMap((job) => [job.relatedSkill, ...(job.skills ?? [])]),
+  ]);
+
+  return candidateSkills.filter((skill) => !ownedSkills.has(normalizeToken(skill))).slice(0, 8);
 }
 
 export function splitCsv(value: string): string[] {
